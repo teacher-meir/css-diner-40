@@ -169,6 +169,7 @@ header {
 
 orange, apple, pickle, bento, plate {
   transition: transform ease-out .2s;
+  vertical-align: middle;
 }
 
 .pop {
@@ -206,6 +207,7 @@ orange, apple, pickle, bento, plate {
 bento, plate {
   box-shadow: 0px 8px 0px rgba(0,0,0,.1);
   display: inline-block;
+  vertical-align: middle;
   width: 100px;
   height: 100px;
   margin: 0 10px;
@@ -1002,7 +1004,7 @@ plate orange:nth-last-child(4)
   display: block;
   cursor: pointer;
   padding: 5px 12px 5px 22px;
-  color: #777;
+  color: var(--color, #777);
 }
 
 .level-menu .level-syntax {
@@ -1032,7 +1034,7 @@ plate orange:nth-last-child(4)
 
 .level-menu .levels a.current {
   font-weight: bold;
-  color: #AAA;
+  /* color: #AAA; */
   background: rgba(255,255,255,.07);
 }
 

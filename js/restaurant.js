@@ -212,6 +212,8 @@ function buildLevelmenu(){
     var level = levels[i];
     var item = document.createElement("a");
     $(item).html("<span class='checkmark'></span><span class='level-number'>" + (i+1) + "</span>" + level.syntax);
+    if(level.color)
+      item.style = `--color: ${level.color}`;
     $(".level-menu .levels").append(item);
 
     if(checkCompleted(i)){
@@ -373,21 +375,6 @@ function fireRule(rule) {
     $(this).width($(this).width());
     $(this).removeAttr("style");
   });
-
-  /*
-  * Sean Nessworthy <sean@nessworthy.me>
-  * On 03/17/14
-  *
-  * Allow [div][.table] to preceed the answer.
-  * Makes sense if div.table is going to be included in the HTML viewer
-  * and users want to try and use it in their selectors.
-  *
-  * However, if it is included as a specific match, filter it out.
-  * This resolves the  "Match all the things!" level from beheading the table too.
-  * Relatedly, watching that happen made me nearly spill my drink.
-  */
-
-  // var baseTable = $('.table-wrapper > .table, .table-wrapper > .nametags, .table-wrapper > .table-surface');
   var baseTable = $('.table');
 
   // Check if jQuery will throw an error trying the mystery rule
@@ -520,10 +507,19 @@ function winGame(){
 }
 
 function checkResults(ruleSelected,levelSelected,rule){
-  var ruleTable = $(".table").clone();
-  ruleTable.find(".strobe").removeClass("strobe");
-  ruleTable.find(rule).addClass("strobe");
-  return($(".table").html() == ruleTable.html());
+  if(ruleSelected.length !== levelSelected.length)
+    return false;
+
+  let flag = true;
+  const levelSelectedArr = Array.from(levelSelected);
+  Array.from(ruleSelected).forEach(element => {
+    // debugger;
+    if(!levelSelectedArr.includes(element)){
+      flag = false;
+      return;
+    }
+  });
+  return flag;
 }
 
 // Returns all formatted markup within an element...
