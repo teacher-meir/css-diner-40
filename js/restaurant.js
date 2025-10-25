@@ -28,24 +28,6 @@ var progress = JSON.parse(localStorage.getItem("progress")) || blankProgress;
 
 
 $(document).ready(function(){
-
-  $(".share-menu").on("click","a",function(){
-
-    var type = $(this).attr("type");
-
-    if(type == "twitter"){
-      var url = "https://twitter.com/intent/tweet?text=Learning%20CSS?%20Try%20CSS%20Diner,%20the%20fun%20way%20to%20practice%20selectors%20%E2%86%92&hashtags=css,cssdiner,webdev&url=http%3A%2F%2Fcssdiner.com%2F&via=flukeout";
-    } else if (type == "facebook") {
-      var url = "https://www.facebook.com/sharer.php?src=sp&u=http%3A%2F%2Fcssdiner.com";
-    } else if (type == "email") {
-      var url = "mailto:?subject=Check+out+CSS+Diner&body=It's+a+fun+game+to+learn+%26+practice+CSS+selectors.%0D%0A%0D%0AYou+can+try+it+at+http://cssdiner.com";
-    }
-
-    PopupCenter(url, "title", 600, 450);
-    sendEvent("share", type, "");
-    return false;
-  });
-
   $(window).on("keydown",function(e){
     if(e.keyCode == 27) {
       closeMenu();
